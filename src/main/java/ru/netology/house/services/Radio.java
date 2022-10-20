@@ -2,34 +2,44 @@ package ru.netology.house.services;
 
 public class Radio {
     private int currentStation;
+    private int minStation = 0;
+    private int maxStation = 9;
+    private int quantityStation;
     private int currentVolume;
+    private int minVolume = 0;
+    private int maxVolume = 100;
 
-
+    public Radio() {
+    }
+    public Radio(int quantityStation) {
+        this.quantityStation = quantityStation;
+        this.maxStation = quantityStation - 1;
+    }
     public int getCurrentStation() {
         return currentStation;
     }
 
     public void setCurrentStation(int currentStation) {
-        if (currentStation < 0) {
+        if (currentStation < minStation) {
             return;
         }
-        if (currentStation > 9) {
+        if (currentStation > maxStation) {
             return;
         }
         this.currentStation = currentStation;
     }
 
     public void nextStation() {
-        if (9 <= currentStation) {
-            setCurrentStation(0);
+        if (maxStation <= currentStation) {
+            setCurrentStation(minStation);
         } else {
             setCurrentStation(currentStation + 1);
         }
     }
 
     public void previousStation() {
-        if (currentStation <= 0) {
-            setCurrentStation(9);
+        if (currentStation <= minStation) {
+            setCurrentStation(maxStation);
         } else {
             setCurrentStation(currentStation - 1);
         }
@@ -40,23 +50,23 @@ public class Radio {
     }
 
     public void setCurrentVolume(int currentVolume) {
-        if (currentVolume < 0) {
+        if (currentVolume < minVolume) {
             return;
         }
-        if (currentVolume > 10) {
+        if (currentVolume > maxVolume) {
             return;
         }
         this.currentVolume = currentVolume;
     }
 
     public void increaseVolume() {
-        if (currentVolume < 10) {
+        if (currentVolume < maxVolume) {
             currentVolume++;
         }
     }
 
     public void decreaseVolume() {
-        if (currentVolume > 0) {
+        if (currentVolume > minVolume) {
             currentVolume--;
         }
     }
