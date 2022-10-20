@@ -6,13 +6,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class RadioTest {
-    Radio radio = new Radio();
+
+    Radio radio = new Radio(20);
 
     @Test
     void shouldChangeStation() {
         assertEquals(0, radio.getCurrentStation());
-        radio.setCurrentStation(5);
-        assertEquals(5, radio.getCurrentStation());
+        radio.setCurrentStation(15);
+        assertEquals(15, radio.getCurrentStation());
     }
 
     @Test
@@ -22,51 +23,45 @@ public class RadioTest {
     }
 
     @Test
-    void shouldSetStationOverMaxStation() {
-        radio.setCurrentStation(10);
-        assertEquals(0, radio.getCurrentStation());
-    }
-
-    @Test
     void shouldNextStation() {
-        radio.setCurrentStation(6);
+        radio.setCurrentStation(9);
         radio.nextStation();
-        assertEquals(7, radio.getCurrentStation());
+        assertEquals(10, radio.getCurrentStation());
     }
 
     @Test
     void shouldOverMaxStation1() {
-        radio.setCurrentStation(9);
+        radio.setCurrentStation(19);
         radio.nextStation();
         assertEquals(0, radio.getCurrentStation());
     }
 
     @Test
     void shouldOverMaxStation2() {
-        radio.setCurrentStation(10);
+        radio.setCurrentStation(20);
         radio.nextStation();
         assertEquals(1, radio.getCurrentStation());
     }
 
     @Test
     void shouldPrevStation() {
-        radio.setCurrentStation(4);
+        radio.setCurrentStation(9);
         radio.previousStation();
-        assertEquals(3, radio.getCurrentStation());
+        assertEquals(8, radio.getCurrentStation());
     }
 
     @Test
     void shouldBelowMinStation1() {
         radio.setCurrentStation(0);
         radio.previousStation();
-        assertEquals(9, radio.getCurrentStation());
+        assertEquals(19, radio.getCurrentStation());
     }
 
     @Test
     void shouldBelowMinStation2() {
         radio.setCurrentStation(-1);
         radio.previousStation();
-        assertEquals(9, radio.getCurrentStation());
+        assertEquals(19, radio.getCurrentStation());
     }
 
     @Test
@@ -85,23 +80,23 @@ public class RadioTest {
 
     @Test
     void shouldOverMaxVolume1() {
-        radio.setCurrentVolume(10);
+        radio.setCurrentVolume(100);
         radio.increaseVolume();
-        assertEquals(10, radio.getCurrentVolume());
+        assertEquals(100, radio.getCurrentVolume());
     }
 
     @Test
     void shouldOverMaxVolume2() {
-        radio.setCurrentVolume(11);
+        radio.setCurrentVolume(101);
         radio.increaseVolume();
         assertEquals(1, radio.getCurrentVolume());
     }
 
     @Test
     void shouldDecreaseVolume() {
-        radio.setCurrentVolume(6);
+        radio.setCurrentVolume(60);
         radio.decreaseVolume();
-        assertEquals(5, radio.getCurrentVolume());
+        assertEquals(59, radio.getCurrentVolume());
     }
 
     @Test
@@ -118,3 +113,4 @@ public class RadioTest {
         assertEquals(0, radio.getCurrentVolume());
     }
 }
+
